@@ -19,9 +19,9 @@ static inline int a_ll(volatile int *p)
 
     asm volatile
     (
-        "ldaxr %w0, %1"
+        "ldaxr %w0, [%1]"
         :"=r"(v)
-        :"Q"(*p)
+        :"p"(p)
         :
     );
 
@@ -34,9 +34,9 @@ static inline int a_sc(volatile int *p, int v)
 
     asm volatile
     (
-        "stlxr %w0, %w2, %1"
+        "stlxr %w0, %w2, [%1]"
         :"=&r"(r)
-        :"Q"(*p), "r"(v)
+        :"p"(p), "r"(v)
         :"memory"
     );
 
